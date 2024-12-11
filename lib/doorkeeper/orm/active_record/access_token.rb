@@ -16,8 +16,9 @@ module Doorkeeper
 
     belongs_to :application, belongs_to_options
 
-    validates :token, presence: true, uniqueness: true
-    validates :refresh_token, uniqueness: true, if: :use_refresh_token?
+    validates :token, presence: true
+    validates_uniqueness_of :token, case_sensitive: true
+    validates_uniqueness_of :refresh_token, case_sensitive: true, if: :use_refresh_token?
 
     # @attr_writer [Boolean, nil] use_refresh_token
     #   indicates the possibility of using refresh token
